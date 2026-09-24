@@ -1,6 +1,6 @@
 {
   "name": "golive-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Check a site is ready before you share the link. Link previews for LinkedIn, X, Slack, iMessage and Discord, SPA refresh 404s, security headers, favicons, noindex left on. MCP server and CLI, no API key.",
   "keywords": [
     "mcp",

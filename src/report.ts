@@ -18,11 +18,13 @@ export function tally(findings: Finding[]) {
   };
 }
 
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
 export function verdict(findings: Finding[]): string {
   const t = tally(findings);
   if (t.fail > 0) return `Not ready: ${t.fail} blocking, ${t.warn} to look at, ${t.pass} fine.`;
-  if (t.warn > 0) return `Ready, with ${t.warn} things worth fixing. ${t.pass} checks fine.`;
-  return `Ready to go live. All ${t.pass} checks fine.`;
+  if (t.warn > 0) return `Ready, with ${plural(t.warn, "thing")} worth fixing. ${plural(t.pass, "check")} fine.`;
+  return `Ready to go live. ${plural(t.pass, "check")} fine.`;
 }
 
 export function formatFindings(title: string, findings: Finding[], showPasses = true): string {

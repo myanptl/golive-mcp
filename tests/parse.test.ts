@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { parseTarget } from "../src/fetch.js";
 import { decode, parseHtml } from "../src/html.js";
 import { imageInfo } from "../src/image.js";
+import { verdict } from "../src/report.js";
 import { png } from "./server.js";
 
 describe("parseHtml", () => {
@@ -80,5 +81,16 @@ describe("parseTarget", () => {
   it("rejects non-http protocols", () => {
     expect(() => parseTarget("file:///etc/passwd")).toThrow(/Only http and https/);
     expect(() => parseTarget("data:text/html,hi")).toThrow();
+  });
+});
+
+describe("verdict", () => {
+  const f = (severity: "fail" | "warn" | "pass") => ({ check: "x", severity, message: "" });
+
+  it("uses singular and plural correctly", () => {
+    expect(verdict([f("warn"), f("pass")])).toBe("Ready, with 1 thing worth fixing. 1 check fine.");
+    expect(verdict([f("warn"), f("warn"), f("pass"), f("pass")])).toBe("Ready, with 2 things worth fixing. 2 checks fine.");
+    expect(verdict([f("pass"), f("pass")])).toBe("Ready to go live. 2 checks fine.");
+    expect(verdict([f("fail"), f("warn")])).toBe("Not ready: 1 blocking, 1 to look at, 0 fine.");
   });
 });
