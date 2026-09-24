@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.myanptl/golive-mcp",
+  "title": "golive",
+  "description": "Check a site before you share it: link previews, SPA refresh 404s, noindex, security headers.",
+  "repository": {
+    "url": "https://github.com/myanptl/golive-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "golive-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
